@@ -10,4 +10,9 @@
     <string name="hint_password">Enter your password</string>
     <string name="btn_login">Login</string>
     <string name="new_here">New here? Let’s get you set up!</string>
+    <string name="register_message">Create an account to get started!</string>
+    <string name="name">Name</string>
+    <string name="name_hint">Enter your name</string>
+    <string name="register">Register</string>
+    <string name="already_have_an_account_login_here">Already have an account? Login here.</string>
 </resources>
