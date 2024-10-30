@@ -1,7 +1,10 @@
 package com.example.storyappdicoding.ui.register
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -24,10 +27,56 @@ class RegisterActivity : AppCompatActivity() {
             insets
         }
 
+        playAnimation()
         binding.toLogin.setOnClickListener {
             val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
             startActivity(intent)
             finish()
+        }
+    }
+
+    private fun playAnimation() {
+        val img = ObjectAnimator.ofFloat(binding.imgRegister, View.ALPHA, 1f).setDuration(1000)
+        val desc = ObjectAnimator.ofFloat(binding.txtDescRegister, View.ALPHA, 1f).setDuration(1000)
+
+        val txtName = ObjectAnimator.ofFloat(binding.nameTextView, View.ALPHA, 1f).setDuration(1000)
+        val inputName =
+            ObjectAnimator.ofFloat(binding.nameEditTextLayout, View.ALPHA, 1f).setDuration(1000)
+        val editName =
+            ObjectAnimator.ofFloat(binding.nameEditText, View.ALPHA, 1f).setDuration(1000)
+
+        val txtEmail =
+            ObjectAnimator.ofFloat(binding.emailTextView, View.ALPHA, 1f).setDuration(1000)
+        val inputEmail =
+            ObjectAnimator.ofFloat(binding.emailEditTextLayout, View.ALPHA, 1f).setDuration(1000)
+        val editEmail =
+            ObjectAnimator.ofFloat(binding.emailEditText, View.ALPHA, 1f).setDuration(1000)
+
+        val txtPassword =
+            ObjectAnimator.ofFloat(binding.txtPassword, View.ALPHA, 1f).setDuration(1000)
+        val inputPassword =
+            ObjectAnimator.ofFloat(binding.passwordEditTextLayout, View.ALPHA, 1f).setDuration(1000)
+        val editPassword =
+            ObjectAnimator.ofFloat(binding.passwordEditText, View.ALPHA, 1f).setDuration(1000)
+
+        val btn = ObjectAnimator.ofFloat(binding.btnRegister, View.ALPHA, 1f).setDuration(1000)
+        val toLogin = ObjectAnimator.ofFloat(binding.toLogin, View.ALPHA, 1f).setDuration(1000)
+
+        val togetherName = AnimatorSet().apply {
+            playTogether(txtName, inputName, editName)
+        }
+
+        val togetherEmail = AnimatorSet().apply {
+            playTogether(txtEmail, inputEmail, editEmail)
+        }
+
+        val togetherPassword = AnimatorSet().apply {
+            playTogether(txtPassword, inputPassword, editPassword)
+        }
+
+        AnimatorSet().apply {
+            playSequentially(img, desc, togetherName, togetherEmail, togetherPassword, btn, toLogin)
+            start()
         }
     }
 }

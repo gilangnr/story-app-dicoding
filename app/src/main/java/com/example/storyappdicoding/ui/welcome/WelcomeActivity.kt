@@ -1,8 +1,11 @@
 package com.example.storyappdicoding.ui.welcome
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
 import androidx.activity.enableEdgeToEdge
@@ -27,6 +30,7 @@ class WelcomeActivity : AppCompatActivity() {
         }
 
 
+        playAnimation()
         binding.btnStart.setOnClickListener {
             val intent = Intent(this@WelcomeActivity, LoginActivity::class.java)
             startActivity(intent)
@@ -34,6 +38,20 @@ class WelcomeActivity : AppCompatActivity() {
         }
     }
 
+    private fun playAnimation() {
+
+
+        val title = ObjectAnimator.ofFloat(binding.txtWelcome, View.ALPHA, 1f).setDuration(1000)
+        val desc = ObjectAnimator.ofFloat(binding.txtDescWelcome, View.ALPHA, 1f).setDuration(1000)
+        val btn = ObjectAnimator.ofFloat(binding.btnStart, View.ALPHA, 1f).setDuration(1000)
+        val img = ObjectAnimator.ofFloat(binding.imgWelcome, View.ALPHA, 1f).setDuration(1000)
+
+
+        AnimatorSet().apply {
+            playSequentially(title, img, desc, btn)
+            start()
+        }
+    }
 
 
 }
