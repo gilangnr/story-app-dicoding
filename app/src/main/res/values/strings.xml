@@ -3,4 +3,11 @@
     <string name="welcome">Welcome to Dicoding Story</string>
     <string name="description_welcome">Share your story, discover fascinating tales around you. Let’s start telling stories!</string>
     <string name="started">Start Telling Stories</string>
+    <string name="msg_login">Hey there! Just one step away. Please log in to start exploring!</string>
+    <string name="email">Email</string>
+    <string name="hint_email">Enter your email</string>
+    <string name="password">Password</string>
+    <string name="hint_password">Enter your password</string>
+    <string name="btn_login">Login</string>
+    <string name="new_here">New here? Let’s get you set up!</string>
 </resources>

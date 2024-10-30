@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.StoryAppDicoding" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-         <item name="colorPrimary">@color/yellow</item>
+        <item name="colorPrimary">@color/yellow</item>
         <item name="colorSecondary">@color/blue</item>
         <item name="colorPrimaryContainer">@color/yellow_light</item>
         <item name="colorSecondaryContainer">@color/blue_dark</item>
