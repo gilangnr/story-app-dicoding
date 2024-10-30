@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Story App Dicoding</string>
+    <string name="welcome">Welcome to Dicoding Story</string>
+    <string name="description_welcome">Share your story, discover fascinating tales around you. Let’s start telling stories!</string>
+    <string name="started">Start Telling Stories</string>
 </resources>
