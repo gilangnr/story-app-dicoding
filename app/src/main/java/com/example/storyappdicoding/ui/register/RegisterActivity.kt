@@ -4,18 +4,26 @@ import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.storyappdicoding.R
+import com.example.storyappdicoding.data.Result
 import com.example.storyappdicoding.databinding.ActivityRegisterBinding
 import com.example.storyappdicoding.ui.login.LoginActivity
 
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
+
+    private val registerViewModel: RegisterViewModel by viewModels {
+        RegisterFactory.getInstance(this)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -33,6 +41,76 @@ class RegisterActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+        binding.btnRegister.setOnClickListener {
+            val name = binding.edRegisterName.text.toString().trim()
+            val email = binding.edRegisterEmail.text.toString().trim()
+            val password = binding.edRegisterPassword.text.toString().trim()
+
+            Log.d("RegisterActivity", "Attempting to register with Name: $name, Email: $email")
+
+            if (isInputValid(name, email, password)) {
+                registerViewModel.register(name, email, password)
+            }
+        }
+
+        observeViewModel()
+    }
+
+    private fun observeViewModel() {
+        registerViewModel.isLoading.observe(this) { isLoading ->
+            showLoading(isLoading)
+        }
+        registerViewModel.registerResult.observe(this) { result ->
+            when(result) {
+                is Result.Loading -> {
+                    showLoading(true)
+                    Log.d("RegisterActivity", "Loading register request")
+                }
+                is Result.Success -> {
+                    showLoading(false)
+                    Log.d("RegisterActivity", "Register success: ${result.data.message}")
+                    Toast.makeText(this, result.data.message, Toast.LENGTH_SHORT).show()
+                }
+                is Result.Error -> {
+                    showLoading(false)
+                    Log.e("RegisterActivity", "Register failed: ${result.error}")
+                    Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    private fun isInputValid(name: String, email: String, password: String): Boolean {
+        var isValid = true
+
+        if (name.isEmpty()) {
+            binding.nameEditTextLayout.error = "Nama tidak boleh kosong"
+            isValid = false
+        } else {
+            binding.nameEditTextLayout.error = null
+        }
+
+        if (email.isEmpty()) {
+            binding.emailEditTextLayout.error = "Email tidak boleh kosong"
+            isValid = false
+        } else {
+            binding.emailEditTextLayout.error = null
+        }
+
+        if (password.isEmpty()) {
+            binding.passwordEditTextLayout.error = "Password tidak boleh kosong"
+            isValid = false
+        } else {
+            binding.passwordEditTextLayout.error = null
+        }
+
+        Log.d("RegisterActivity", "Input validation passed: Name=$name, Email=$email, Password length=${password.length}")
+        return isValid
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+
     }
 
     private fun playAnimation() {
