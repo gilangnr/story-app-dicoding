@@ -60,7 +60,7 @@
         tools:alpha="100">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/nameEditText"
+            android:id="@+id/ed_register_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/name_hint"
@@ -95,7 +95,7 @@
         tools:alpha="100">
 
         <com.example.storyappdicoding.ui.custom_view.CustomEmailEditText
-            android:id="@+id/emailEditText"
+            android:id="@+id/ed_register_email"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:hint="@string/hint_email"
@@ -132,7 +132,7 @@
         tools:alpha="100">
 
         <com.example.storyappdicoding.ui.custom_view.CustomPasswordEditText
-            android:id="@+id/passwordEditText"
+            android:id="@+id/ed_register_password"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:backgroundTint="@color/blue"

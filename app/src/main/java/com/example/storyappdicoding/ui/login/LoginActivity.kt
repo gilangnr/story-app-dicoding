@@ -42,10 +42,10 @@ class LoginActivity : AppCompatActivity() {
             msgLogin.visibility = View.VISIBLE
             emailTextView.visibility = View.VISIBLE
             emailEditTextLayout.visibility = View.VISIBLE
-            emailEditText.visibility = View.VISIBLE
+            edLoginEmail.visibility = View.VISIBLE
             passwordTextView.visibility = View.VISIBLE
             PasswordEditTextLayout.visibility = View.VISIBLE
-            passwordEditText.visibility = View.VISIBLE
+            edLoginPassword.visibility = View.VISIBLE
             btnLogin.visibility = View.VISIBLE
             toRegister.visibility = View.VISIBLE
         }
@@ -58,14 +58,14 @@ class LoginActivity : AppCompatActivity() {
         val inputEmail =
             ObjectAnimator.ofFloat(binding.emailEditTextLayout, View.ALPHA, 1f).setDuration(1000)
         val editEmail =
-            ObjectAnimator.ofFloat(binding.emailEditText, View.ALPHA, 1f).setDuration(1000)
+            ObjectAnimator.ofFloat(binding.edLoginEmail, View.ALPHA, 1f).setDuration(1000)
 
         val txtPassword =
             ObjectAnimator.ofFloat(binding.passwordTextView, View.ALPHA, 1f).setDuration(1000)
         val inputPassword =
             ObjectAnimator.ofFloat(binding.PasswordEditTextLayout, View.ALPHA, 1f).setDuration(1000)
         val editPassword =
-            ObjectAnimator.ofFloat(binding.passwordEditText, View.ALPHA, 1f).setDuration(1000)
+            ObjectAnimator.ofFloat(binding.edLoginPassword, View.ALPHA, 1f).setDuration(1000)
 
         val btn = ObjectAnimator.ofFloat(binding.btnLogin, View.ALPHA, 1f).setDuration(1000)
         val toReg = ObjectAnimator.ofFloat(binding.toRegister, View.ALPHA, 1f).setDuration(1000)
@@ -85,10 +85,10 @@ class LoginActivity : AppCompatActivity() {
                 }
 
                 override fun onAnimationEnd(animation: Animator) {
-                    binding.emailEditText.isClickable = true
-                    binding.emailEditText.isFocusableInTouchMode = true
-                    binding.passwordEditText.isClickable = true
-                    binding.passwordEditText.isFocusableInTouchMode = true
+                    binding.edLoginEmail.isClickable = true
+                    binding.edLoginEmail.isFocusableInTouchMode = true
+                    binding.edLoginPassword.isClickable = true
+                    binding.edLoginPassword.isFocusableInTouchMode = true
                 }
 
                 override fun onAnimationCancel(animation: Animator) {

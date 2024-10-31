@@ -59,7 +59,7 @@
         tools:alpha="100">
 
         <com.example.storyappdicoding.ui.custom_view.CustomEmailEditText
-            android:id="@+id/emailEditText"
+            android:id="@+id/ed_login_email"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:backgroundTint="@color/blue"
@@ -98,7 +98,7 @@
         tools:alpha="100">
 
         <com.example.storyappdicoding.ui.custom_view.CustomPasswordEditText
-            android:id="@+id/passwordEditText"
+            android:id="@+id/ed_login_password"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:backgroundTint="@color/blue"
