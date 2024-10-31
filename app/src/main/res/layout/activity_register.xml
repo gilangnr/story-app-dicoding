@@ -94,14 +94,15 @@
         android:alpha="0"
         tools:alpha="100">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <com.example.storyappdicoding.ui.custom_view.CustomEmailEditText
             android:id="@+id/emailEditText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="56dp"
             android:hint="@string/hint_email"
             android:inputType="textEmailAddress"
             android:textColorHint="@color/blue"
             android:textCursorDrawable="@null"
+            android:padding="16dp"
             android:alpha="0"
             tools:alpha="100"/>
     </com.google.android.material.textfield.TextInputLayout>
