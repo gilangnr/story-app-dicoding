@@ -8,6 +8,7 @@ import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.ViewParent
+import com.example.storyappdicoding.R
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
@@ -48,7 +49,7 @@ class CustomPasswordEditText @JvmOverloads constructor(
             textInputLayout = findParentTextInputLayout()
         }
         if (password != null && password.length < 8) {
-            textInputLayout?.error = "Password harus lebih dari 8 karakter"
+            textInputLayout?.error = context.getString(R.string.password_validation)
         } else {
             textInputLayout?.error = null
         }
