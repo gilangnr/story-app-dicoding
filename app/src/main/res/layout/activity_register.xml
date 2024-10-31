@@ -130,14 +130,17 @@
         android:alpha="0"
         tools:alpha="100">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <com.example.storyappdicoding.ui.custom_view.CustomPasswordEditText
             android:id="@+id/passwordEditText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="56dp"
+            android:backgroundTint="@color/blue"
+            android:cursorVisible="true"
             android:hint="@string/hint_password"
             android:inputType="textPassword"
             android:textColorHint="@color/blue"
             android:textCursorDrawable="@null"
+            android:padding="16dp"
             android:alpha="0"
             tools:alpha="100"/>
     </com.google.android.material.textfield.TextInputLayout>
