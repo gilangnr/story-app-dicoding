@@ -4,7 +4,6 @@ import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -46,8 +45,6 @@ class RegisterActivity : AppCompatActivity() {
             val email = binding.edRegisterEmail.text.toString().trim()
             val password = binding.edRegisterPassword.text.toString().trim()
 
-            Log.d("RegisterActivity", "Attempting to register with Name: $name, Email: $email")
-
             if (isInputValid(name, email, password)) {
                 registerViewModel.register(name, email, password)
             }
@@ -64,16 +61,13 @@ class RegisterActivity : AppCompatActivity() {
             when(result) {
                 is Result.Loading -> {
                     showLoading(true)
-                    Log.d("RegisterActivity", "Loading register request")
                 }
                 is Result.Success -> {
                     showLoading(false)
-                    Log.d("RegisterActivity", "Register success: ${result.data.message}")
                     Toast.makeText(this, result.data.message, Toast.LENGTH_SHORT).show()
                 }
                 is Result.Error -> {
                     showLoading(false)
-                    Log.e("RegisterActivity", "Register failed: ${result.error}")
                     Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
                 }
             }
@@ -84,27 +78,26 @@ class RegisterActivity : AppCompatActivity() {
         var isValid = true
 
         if (name.isEmpty()) {
-            binding.nameEditTextLayout.error = "Nama tidak boleh kosong"
+            binding.nameEditTextLayout.error = getString(R.string.empty_name)
             isValid = false
         } else {
             binding.nameEditTextLayout.error = null
         }
 
         if (email.isEmpty()) {
-            binding.emailEditTextLayout.error = "Email tidak boleh kosong"
+            binding.emailEditTextLayout.error = getString(R.string.empty_email)
             isValid = false
         } else {
             binding.emailEditTextLayout.error = null
         }
 
         if (password.isEmpty()) {
-            binding.passwordEditTextLayout.error = "Password tidak boleh kosong"
+            binding.passwordEditTextLayout.error = getString(R.string.empty_password)
             isValid = false
         } else {
             binding.passwordEditTextLayout.error = null
         }
 
-        Log.d("RegisterActivity", "Input validation passed: Name=$name, Email=$email, Password length=${password.length}")
         return isValid
     }
 

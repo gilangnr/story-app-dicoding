@@ -84,14 +84,14 @@ class LoginActivity : AppCompatActivity() {
     private fun isInputValid(email: String, password: String): Boolean {
         var isValid = true
         if (email.isEmpty()) {
-            binding.emailEditTextLayout.error = "Email tidak boleh kosong"
+            binding.emailEditTextLayout.error = getString(R.string.empty_email)
             isValid = false
         } else {
             binding.emailEditTextLayout.error = null
         }
 
         if (password.isEmpty()) {
-            binding.PasswordEditTextLayout.error = "Password tidak boleh kosong"
+            binding.PasswordEditTextLayout.error = getString(R.string.empty_password)
             isValid = false
         } else {
             binding.PasswordEditTextLayout.error = null

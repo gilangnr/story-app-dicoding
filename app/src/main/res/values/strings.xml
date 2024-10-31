@@ -17,4 +17,7 @@
     <string name="already_have_an_account_login_here">Already have an account? Login here.</string>
     <string name="password_validation">Password must be more than 8 characters</string>
     <string name="email_validation">Invalid email format</string>
+    <string name="empty_name">Name cannot be empty</string>
+    <string name="empty_email">Email cannot be empty</string>
+    <string name="empty_password">Password cannot be empty</string>
 </resources>
