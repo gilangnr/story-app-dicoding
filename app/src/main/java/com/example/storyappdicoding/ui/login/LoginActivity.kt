@@ -13,14 +13,19 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
+import com.example.storyappdicoding.MainActivity
 import com.example.storyappdicoding.R
 import com.example.storyappdicoding.data.Result
 import com.example.storyappdicoding.databinding.ActivityLoginBinding
+import com.example.storyappdicoding.pref.SessionManager
 import com.example.storyappdicoding.ui.register.RegisterActivity
+import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
+    private lateinit var sessionManager: SessionManager
 
     private val loginViewModel: LoginViewModel by viewModels {
         LoginFactory.getInstance(this)
@@ -30,6 +35,9 @@ class LoginActivity : AppCompatActivity() {
         enableEdgeToEdge()
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        
+        sessionManager = SessionManager(this)
+        
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -66,7 +74,13 @@ class LoginActivity : AppCompatActivity() {
                 }
                 is Result.Success -> {
                     showLoading(false)
+                    val token = result.data.loginResult.token
+                    lifecycleScope.launch {
+                        sessionManager.saveAuthToken(token)
+                    }
                     Toast.makeText(this, result.data.message, Toast.LENGTH_SHORT).show()
+                    
+                    navigateToMainActivity()
                 }
                 is Result.Error -> {
                     showLoading(false)
@@ -74,6 +88,12 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun navigateToMainActivity() {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
     private fun showLoading(isLoading: Boolean) {

@@ -6,6 +6,7 @@ import com.example.storyappdicoding.data.remote.response.RegisterResponse
 import com.example.storyappdicoding.data.remote.retrofit.ApiService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import retrofit2.HttpException
 
 class Repository private constructor(
     private val apiService: ApiService
@@ -37,7 +38,7 @@ class Repository private constructor(
                 } else {
                     Result.Error(response.message)
                 }
-            } catch (e: Exception) {
+            } catch (e: HttpException) {
                 Result.Error("${e.message}")
             }
         }
