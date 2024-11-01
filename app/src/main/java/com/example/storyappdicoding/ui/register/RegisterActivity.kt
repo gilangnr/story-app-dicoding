@@ -65,6 +65,9 @@ class RegisterActivity : AppCompatActivity() {
                 is Result.Success -> {
                     showLoading(false)
                     Toast.makeText(this, result.data.message, Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
+                    startActivity(intent)
+                    finish()
                 }
                 is Result.Error -> {
                     showLoading(false)
