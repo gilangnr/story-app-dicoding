@@ -1,8 +1,11 @@
 package com.example.storyappdicoding.data.remote
 
+import android.util.Log
 import com.example.storyappdicoding.data.Result
+import com.example.storyappdicoding.data.remote.response.ListStoryItem
 import com.example.storyappdicoding.data.remote.response.LoginResponse
 import com.example.storyappdicoding.data.remote.response.RegisterResponse
+import com.example.storyappdicoding.data.remote.response.StoryResponse
 import com.example.storyappdicoding.data.remote.retrofit.ApiService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -44,6 +47,24 @@ class Repository private constructor(
         }
     }
 
+    suspend fun getAllStories(token: String): Result<List<ListStoryItem>> {
+        return withContext(Dispatchers.IO) {
+            try {
+                val token = "Bearer $token"
+                val response = apiService.getStories(token)
+                Log.d("API Response", response.toString())
+                if (!response.error) {
+                    Result.Success(response.listStory)
+                } else {
+                    Result.Error(response.message)
+                }
+            } catch (e: HttpException) {
+                Result.Error("Http Exception: ${e.message}")
+            } catch (e: Exception) {
+                Result.Error("An error occured: ${e.message}")
+            }
+        }
+    }
     companion object {
         @Volatile
         private var INSTANCE: Repository? = null

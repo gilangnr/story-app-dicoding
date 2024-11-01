@@ -1,28 +1,40 @@
-package com.example.storyappdicoding
+package com.example.storyappdicoding.ui.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import androidx.activity.enableEdgeToEdge
+import android.view.View
+import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.storyappdicoding.R
+import com.example.storyappdicoding.data.Result
 import com.example.storyappdicoding.databinding.ActivityMainBinding
 import com.example.storyappdicoding.pref.SessionManager
-import com.example.storyappdicoding.ui.login.LoginActivity
+import com.example.storyappdicoding.ui.detail.DetailActivity
 import com.example.storyappdicoding.ui.welcome.WelcomeActivity
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var sessionManager: SessionManager
+    private lateinit var adapter: MainAdapter
+    private val mainViewModel: MainViewModel by viewModels {
+        MainFactory.getInstance(this)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        enableEdgeToEdge()
         setContentView(binding.root)
+
+        setupRecyclerView()
 
         sessionManager = SessionManager(this)
         val toolbar = binding.toolbar
@@ -33,13 +45,56 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+        checkAuthentication()
+        observeViewModel()
+    }
+
+    private fun setupRecyclerView() {
+        adapter = MainAdapter { story -> // Hanya perlu satu parameter untuk onItemClick
+            val intent = Intent(this, DetailActivity::class.java).apply {
+                putExtra("STORY_ID", story.id)
+            }
+            startActivity(intent)
+        }
+        binding.recyclerView.apply {
+            layoutManager = LinearLayoutManager(context)
+            this.adapter = this@MainActivity.adapter
+        }
+    }
+
+
+    private fun checkAuthentication() {
         val token = sessionManager.getAuthToken()
         if (token == null) {
             navigateToLogin()
         } else {
-            binding.txtToken.text = "Welcome, your token is: $token"
+            mainViewModel.getAllStories(token)
+        }
+    }
+
+    private fun observeViewModel() {
+        mainViewModel.isLoading.observe(this) { isLoading ->
+            showLoading(isLoading)
         }
 
+        mainViewModel.stories.observe(this) { result ->
+            when (result) {
+                is Result.Loading -> showLoading(true)
+                is Result.Success -> {
+                    showLoading(false)
+                    Log.d("MainActivity", "Data received: ${result.data}")
+                    adapter.submitList(result.data)  // Gunakan submitList untuk mengupdate data
+                }
+                is Result.Error -> {
+                    showLoading(false)
+                    Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -48,7 +103,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId) {
+        return when (item.itemId) {
             R.id.action_logout -> {
                 showLogoutConfirmation()
                 true

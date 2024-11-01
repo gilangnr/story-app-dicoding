@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
-import com.example.storyappdicoding.MainActivity
+import com.example.storyappdicoding.ui.main.MainActivity
 import com.example.storyappdicoding.R
 import com.example.storyappdicoding.data.Result
 import com.example.storyappdicoding.databinding.ActivityLoginBinding
