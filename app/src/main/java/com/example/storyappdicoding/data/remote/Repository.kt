@@ -52,7 +52,6 @@ class Repository private constructor(
             try {
                 val token = "Bearer $token"
                 val response = apiService.getStories(token)
-                Log.d("API Response", response.toString())
                 if (!response.error) {
                     Result.Success(response.listStory)
                 } else {

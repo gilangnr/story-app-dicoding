@@ -30,18 +30,18 @@ class MainAdapter(private val onItemClick: (ListStoryItem) -> Unit) : ListAdapte
     }
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
-        val story = getItem(position) // Mengambil item menggunakan getItem
+        val story = getItem(position)
         holder.bind(story)
     }
 
     companion object {
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<ListStoryItem>() {
             override fun areItemsTheSame(oldItem: ListStoryItem, newItem: ListStoryItem): Boolean {
-                return oldItem.id == newItem.id // Pastikan menggunakan ID untuk membandingkan item
+                return oldItem.id == newItem.id
             }
 
             override fun areContentsTheSame(oldItem: ListStoryItem, newItem: ListStoryItem): Boolean {
-                return oldItem == newItem // Memastikan semua konten sama
+                return oldItem == newItem
             }
         }
     }

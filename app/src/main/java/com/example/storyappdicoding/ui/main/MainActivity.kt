@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupRecyclerView() {
-        adapter = MainAdapter { story -> // Hanya perlu satu parameter untuk onItemClick
+        adapter = MainAdapter { story ->
             val intent = Intent(this, DetailActivity::class.java).apply {
                 putExtra("STORY_ID", story.id)
             }
@@ -82,8 +82,7 @@ class MainActivity : AppCompatActivity() {
                 is Result.Loading -> showLoading(true)
                 is Result.Success -> {
                     showLoading(false)
-                    Log.d("MainActivity", "Data received: ${result.data}")
-                    adapter.submitList(result.data)  // Gunakan submitList untuk mengupdate data
+                    adapter.submitList(result.data)
                 }
                 is Result.Error -> {
                     showLoading(false)
