@@ -5,6 +5,7 @@ import com.example.storyappdicoding.data.Result
 import com.example.storyappdicoding.data.remote.response.ListStoryItem
 import com.example.storyappdicoding.data.remote.response.LoginResponse
 import com.example.storyappdicoding.data.remote.response.RegisterResponse
+import com.example.storyappdicoding.data.remote.response.Story
 import com.example.storyappdicoding.data.remote.response.StoryResponse
 import com.example.storyappdicoding.data.remote.retrofit.ApiService
 import kotlinx.coroutines.Dispatchers
@@ -54,6 +55,24 @@ class Repository private constructor(
                 val response = apiService.getStories(token)
                 if (!response.error) {
                     Result.Success(response.listStory)
+                } else {
+                    Result.Error(response.message)
+                }
+            } catch (e: HttpException) {
+                Result.Error("Http Exception: ${e.message}")
+            } catch (e: Exception) {
+                Result.Error("An error occured: ${e.message}")
+            }
+        }
+    }
+
+    suspend fun getDetail(token: String, id: String): Result<Story> {
+        return withContext(Dispatchers.IO) {
+            try {
+                val token = "Bearer $token"
+                val response = apiService.getDetail(token, id)
+                if (!response.error) {
+                    Result.Success(response.story)
                 } else {
                     Result.Error(response.message)
                 }
