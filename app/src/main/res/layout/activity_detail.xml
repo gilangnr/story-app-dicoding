@@ -7,4 +7,14 @@
     android:layout_height="match_parent"
     tools:context=".ui.detail.DetailActivity">
 
+    <TextView
+        android:id="@+id/story_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="your id is"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
