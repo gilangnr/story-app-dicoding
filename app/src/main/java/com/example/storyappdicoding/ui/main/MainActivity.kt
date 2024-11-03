@@ -17,6 +17,7 @@ import com.example.storyappdicoding.R
 import com.example.storyappdicoding.data.Result
 import com.example.storyappdicoding.databinding.ActivityMainBinding
 import com.example.storyappdicoding.pref.SessionManager
+import com.example.storyappdicoding.ui.add_story.AddStoryActivity
 import com.example.storyappdicoding.ui.detail.DetailActivity
 import com.example.storyappdicoding.ui.welcome.WelcomeActivity
 
@@ -45,8 +46,14 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+
         checkAuthentication()
         observeViewModel()
+
+        binding.fabAddStory.setOnClickListener {
+            val intent = Intent(this@MainActivity, AddStoryActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun setupRecyclerView() {

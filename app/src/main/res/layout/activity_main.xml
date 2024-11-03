@@ -29,4 +29,14 @@
         android:layout_marginHorizontal="8dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_add_story"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/add_story"
+        android:src="@drawable/round_add_24"
+        android:backgroundTint="?attr/colorPrimary"/>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
