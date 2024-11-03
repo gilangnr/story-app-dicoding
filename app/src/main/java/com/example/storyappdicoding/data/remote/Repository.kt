@@ -2,6 +2,7 @@ package com.example.storyappdicoding.data.remote
 
 import android.util.Log
 import com.example.storyappdicoding.data.Result
+import com.example.storyappdicoding.data.remote.response.AddStoryResponse
 import com.example.storyappdicoding.data.remote.response.ListStoryItem
 import com.example.storyappdicoding.data.remote.response.LoginResponse
 import com.example.storyappdicoding.data.remote.response.RegisterResponse
@@ -10,6 +11,8 @@ import com.example.storyappdicoding.data.remote.response.StoryResponse
 import com.example.storyappdicoding.data.remote.retrofit.ApiService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.HttpException
 
 class Repository private constructor(
@@ -80,6 +83,30 @@ class Repository private constructor(
                 Result.Error("Http Exception: ${e.message}")
             } catch (e: Exception) {
                 Result.Error("An error occured: ${e.message}")
+            }
+        }
+    }
+
+    suspend fun addStory(
+        token: String,
+        description: RequestBody,
+        photo: MultipartBody.Part,
+        lat: RequestBody? = null,
+        lon: RequestBody? = null
+    ): Result<AddStoryResponse> {
+        return withContext(Dispatchers.IO) {
+            try {
+                val token = "Bearer $token"
+                val response = apiService.addStory(token, description, photo, lat, lon)
+                if (!response.error) {
+                    Result.Success(response)
+                } else {
+                    Result.Error(response.message)
+                }
+            } catch (e: HttpException) {
+                Result.Error("HTTP Exception: ${e.message}")
+            } catch (e: Exception) {
+                Result.Error("An error occurred: ${e.message}")
             }
         }
     }
