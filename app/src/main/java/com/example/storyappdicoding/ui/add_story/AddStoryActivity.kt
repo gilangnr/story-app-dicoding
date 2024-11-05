@@ -13,6 +13,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.storyappdicoding.R
 import com.example.storyappdicoding.databinding.ActivityAddStoryBinding
 import com.example.storyappdicoding.pref.SessionManager
+import com.example.storyappdicoding.utils.getImageUri
 
     class AddStoryActivity : AppCompatActivity() {
 
@@ -38,6 +39,7 @@ import com.example.storyappdicoding.pref.SessionManager
         sessionManager = SessionManager(this)
 
         binding.btnGallery.setOnClickListener { startGallery() }
+        binding.btnCamera.setOnClickListener { startCamera() }
 
     }
 
@@ -52,14 +54,27 @@ import com.example.storyappdicoding.pref.SessionManager
                 currentImageUri = uri
                 showImage()
             } else {
-                Log.d("Photo picker", "No media selected")
-                Toast.makeText(this, "No media selected", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.no_media_selected), Toast.LENGTH_SHORT).show()
             }
         }
 
+        private fun startCamera() {
+            currentImageUri = getImageUri(this)
+            launcherIntentCamera.launch(currentImageUri!!)
+        }
+        private val launcherIntentCamera = registerForActivityResult(
+            ActivityResultContracts.TakePicture()
+        ) { isSuccess ->
+            if (isSuccess) {
+                showImage()
+            } else {
+                currentImageUri = null
+            }
+        }
+
+
         private fun showImage() {
             currentImageUri?.let {
-                Log.d("Image Uri", "showImage: $it")
                 binding.imgPreview.setImageURI(it)
             }
         }
