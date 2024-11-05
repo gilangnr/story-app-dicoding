@@ -21,4 +21,7 @@
     <string name="empty_email">Email cannot be empty</string>
     <string name="empty_password">Password cannot be empty</string>
     <string name="add_story">add story</string>
+    <string name="upload">Upload</string>
+    <string name="camera">Camera</string>
+    <string name="gallery">Gallery</string>
 </resources>

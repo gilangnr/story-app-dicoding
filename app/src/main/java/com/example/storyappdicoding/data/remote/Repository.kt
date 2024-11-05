@@ -105,7 +105,7 @@ class Repository private constructor(
                 }
             } catch (e: HttpException) {
                 Result.Error("HTTP Exception: ${e.message}")
-            } catch (e: Exception) {
+            } catch (e: Exception) {    
                 Result.Error("An error occurred: ${e.message}")
             }
         }
