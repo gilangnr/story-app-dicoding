@@ -56,6 +56,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        mainViewModel.stories
+    }
+
     private fun setupRecyclerView() {
         adapter = MainAdapter { story ->
             val intent = Intent(this, DetailActivity::class.java).apply {
