@@ -27,7 +27,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:title="Upload Story" />
+                app:title="@string/upload_story" />
 
             <ImageView
                 android:id="@+id/img_preview"

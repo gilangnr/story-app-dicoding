@@ -36,4 +36,7 @@
     <string name="image_login">image_login</string>
     <string name="image_welcome">image_welcome</string>
     <string name="logout">Logout</string>
+    <string name="change_language">change_language</string>
+    <string name="upload_story">Upload Story</string>
+    <string name="detail_page">Detail Page</string>
 </resources>

@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:background="?android:attr/colorPrimary"
             android:theme="?attr/actionBarTheme"
-            app:title="Detail Page"
+            app:title="@string/detail_page"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
