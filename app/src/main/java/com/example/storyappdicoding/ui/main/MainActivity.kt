@@ -2,7 +2,6 @@ package com.example.storyappdicoding.ui.main
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -125,13 +124,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun showLogoutConfirmation() {
         AlertDialog.Builder(this)
-            .setTitle("Confirm Logout")
-            .setMessage("Are you sure you want to logout?")
-            .setPositiveButton("Yes") { dialog, _ ->
+            .setTitle(getString(R.string.confirm_logout))
+            .setMessage(getString(R.string.are_you_sure_you_want_to_logout))
+            .setPositiveButton(getString(R.string.yes)) { dialog, _ ->
                 logout()
                 dialog.dismiss()
             }
-            .setNegativeButton("No") { dialog, _ ->
+            .setNegativeButton(getString(R.string.no)) { dialog, _ ->
                 dialog.dismiss()
             }
             .show()

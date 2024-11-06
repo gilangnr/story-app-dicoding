@@ -5,8 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.storyappdicoding.data.remote.Repository
 import com.example.storyappdicoding.di.Injection
-import com.example.storyappdicoding.ui.login.LoginFactory
-import com.example.storyappdicoding.ui.login.LoginViewModel
 
 class MainFactory(private val repository: Repository): ViewModelProvider.NewInstanceFactory() {
     @Suppress("UNCHECKED_CAST")

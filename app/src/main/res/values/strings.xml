@@ -25,4 +25,15 @@
     <string name="camera">Camera</string>
     <string name="gallery">Gallery</string>
     <string name="no_media_selected">No media selected</string>
+    <string name="please_add_description">Please add description</string>
+    <string name="please_upload_an_image">Please upload an image</string>
+    <string name="confirm_logout">Confirm Logout</string>
+    <string name="are_you_sure_you_want_to_logout">Are you sure you want to logout?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="image_story">image_story</string>
+    <string name="description">description</string>
+    <string name="image_login">image_login</string>
+    <string name="image_welcome">image_welcome</string>
+    <string name="logout">Logout</string>
 </resources>

@@ -37,7 +37,8 @@
                 android:src="@mipmap/ic_launcher_round"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/toolbar" />
+                app:layout_constraintTop_toBottomOf="@id/toolbar"
+                android:contentDescription="@string/image_story" />
 
             <Button
                 android:id="@+id/btn_camera"
@@ -68,7 +69,7 @@
                 android:layout_margin="8dp"
                 android:background="@drawable/edit_text_description"
                 android:gravity="top"
-                android:hint="description"
+                android:hint="@string/description"
                 android:inputType="textMultiLine"
                 android:padding="8dp"
                 app:layout_constraintEnd_toEndOf="parent"

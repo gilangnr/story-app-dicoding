@@ -17,7 +17,8 @@
         android:layout_margin="8dp"
         android:src="@drawable/img_login"
         android:alpha="0"
-        tools:alpha="100"/>
+        tools:alpha="100"
+        android:contentDescription="@string/image_login" />
 
     <TextView
         android:id="@+id/msg_login"

@@ -1,13 +1,11 @@
 package com.example.storyappdicoding.data.remote
 
-import android.util.Log
 import com.example.storyappdicoding.data.Result
 import com.example.storyappdicoding.data.remote.response.AddStoryResponse
 import com.example.storyappdicoding.data.remote.response.ListStoryItem
 import com.example.storyappdicoding.data.remote.response.LoginResponse
 import com.example.storyappdicoding.data.remote.response.RegisterResponse
 import com.example.storyappdicoding.data.remote.response.Story
-import com.example.storyappdicoding.data.remote.response.StoryResponse
 import com.example.storyappdicoding.data.remote.retrofit.ApiService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

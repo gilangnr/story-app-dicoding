@@ -3,7 +3,6 @@
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -91,12 +90,12 @@ import okhttp3.RequestBody.Companion.toRequestBody
             val description = binding.edAddDescription.text.toString().trim()
 
             if (description.isEmpty()) {
-                Toast.makeText(this, "Please add description", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.please_add_description), Toast.LENGTH_SHORT).show()
                 return
             }
 
             if (currentImageUri == null) {
-                Toast.makeText(this, "Please upload an image", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.please_upload_an_image), Toast.LENGTH_SHORT).show()
                 return
             }
 
