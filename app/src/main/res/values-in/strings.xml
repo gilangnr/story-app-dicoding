@@ -40,4 +40,10 @@
     <string name="change_language">ubah_bahasa</string>
     <string name="upload_story">Unggah Cerita</string>
     <string name="detail_page">Halaman Detail</string>
+    <string name="title_activity_story_maps">StoryMapsActivity</string>
+    <string name="story_maps">Map Cerita</string>
+    <string name="normal_type">Normal</string>
+    <string name="satellite_type">Satelite</string>
+    <string name="terrain_type">Terrain</string>
+    <string name="hybrid_type">Hybrid</string>
 </resources>

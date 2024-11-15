@@ -19,6 +19,7 @@ import com.example.storyappdicoding.databinding.ActivityMainBinding
 import com.example.storyappdicoding.pref.SessionManager
 import com.example.storyappdicoding.ui.add_story.AddStoryActivity
 import com.example.storyappdicoding.ui.detail.DetailActivity
+import com.example.storyappdicoding.ui.story_map.StoryMapsActivity
 import com.example.storyappdicoding.ui.welcome.WelcomeActivity
 
 class MainActivity : AppCompatActivity() {
@@ -121,6 +122,10 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.action_localization -> {
                 startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
+                true
+            }
+            R.id.action_map -> {
+                startActivity(Intent(this@MainActivity, StoryMapsActivity::class.java))
                 true
             }
             else -> super.onOptionsItemSelected(item)
