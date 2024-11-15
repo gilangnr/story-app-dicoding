@@ -59,7 +59,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        mainViewModel.stories
+        val token = sessionManager.getAuthToken()
+        if (token != null) {
+            mainViewModel.stories(token)
+        }
     }
 
     private fun setupRecyclerView() {
@@ -73,6 +76,11 @@ class MainActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(context)
             this.adapter = this@MainActivity.adapter
         }
+        binding.recyclerView.adapter = adapter.withLoadStateFooter(
+            footer = LoadingStateAdapter{
+                adapter.retry()
+            }
+        )
     }
 
 
@@ -81,27 +89,19 @@ class MainActivity : AppCompatActivity() {
         if (token == null) {
             navigateToLogin()
         } else {
-            mainViewModel.getAllStories(token)
+            mainViewModel.stories(token)
         }
     }
 
     private fun observeViewModel() {
+        val token = sessionManager.getAuthToken()
+        if (token != null) {
+            mainViewModel.stories(token).observe(this) { pagingData ->
+                adapter.submitData(lifecycle, pagingData)
+            }
+        }
         mainViewModel.isLoading.observe(this) { isLoading ->
             showLoading(isLoading)
-        }
-
-        mainViewModel.stories.observe(this) { result ->
-            when (result) {
-                is Result.Loading -> showLoading(true)
-                is Result.Success -> {
-                    showLoading(false)
-                    adapter.submitList(result.data)
-                }
-                is Result.Error -> {
-                    showLoading(false)
-                    Toast.makeText(this, result.error, Toast.LENGTH_SHORT).show()
-                }
-            }
         }
     }
 

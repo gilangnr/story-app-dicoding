@@ -1,5 +1,10 @@
 package com.example.storyappdicoding.data.remote
 
+import androidx.lifecycle.LiveData
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.liveData
 import com.example.storyappdicoding.data.Result
 import com.example.storyappdicoding.data.remote.response.AddStoryResponse
 import com.example.storyappdicoding.data.remote.response.ListStoryItem
@@ -7,6 +12,7 @@ import com.example.storyappdicoding.data.remote.response.LoginResponse
 import com.example.storyappdicoding.data.remote.response.RegisterResponse
 import com.example.storyappdicoding.data.remote.response.Story
 import com.example.storyappdicoding.data.remote.retrofit.ApiService
+import com.example.storyappdicoding.pref.SessionManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import okhttp3.MultipartBody
@@ -16,7 +22,6 @@ import retrofit2.HttpException
 class Repository private constructor(
     private val apiService: ApiService
 ){
-
     suspend fun login(email: String, password: String): Result<LoginResponse> {
         return withContext(Dispatchers.IO) {
             try {
@@ -125,6 +130,17 @@ class Repository private constructor(
                 Result.Error("An error occured: ${e.message}")
             }
         }
+    }
+
+    fun getStoriesPaging(token: String): LiveData<PagingData<ListStoryItem>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = 5
+            ),
+            pagingSourceFactory = {
+                StoryPagingSource(apiService, token)
+            }
+        ).liveData
     }
     companion object {
         @Volatile
